@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ContactApp</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <h5>Employee</h5>
+    </div>
+
+    <div class="upper-btn-box">
+      <div class="left-box">
+        <button id="add-btn">
+          <i class="fa-solid fa-plus"></i>&nbsp;Add Employee
+        </button>
+        <!-- <button style="background-color: #33b5e6">
+          <i class="fa-solid fa-eraser"></i>&nbsp;Clear Employee
+        </button> -->
+      </div>
+      <div class="right-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="empId" placeholder="Enter employee ID" />
+        <button style="background-color: #ee534f">Search</button>
+      </div>
+    </div>
+
+    <div class="table-box">
+      <table>
+        <tr>
+          <th>Sr No</th>
+          <th>Profile</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+        </tr>
+
+        <tbody id="table-data"></tbody>
+      </table>
+    </div>
+    <div class="modal">
+      <i><i class="fa-solid fa-circle-xmark close-icon"></i></i>
+      <div class="left-modal">
+        <div class="img-box">
+          <img
+            src="person.jpg"
+            id="profile-pic"
+            alt="Profile Pic"
+            height="150"
+            width="150"
+          />
+          <i class="fa-solid fa-plus"></i>
+          <input type="file" id="upload-field" />
+          <i></i>
+        </div>
+      </div>
+      <div class="right-modal">
+        <form onsubmit="phoneValidation();" id="register-Form">
+          <div class="input-box">
+            <label for="id">Id</label>
+            <input type="text" required id="id" />
+          </div>
+
+          <div class="input-box">
+            <label for="name">Name</label>
+            <input type="text" required id="name" />
+          </div>
+
+          <div class="input-box">
+            <label for="l-name">Last Name</label>
+            <input type="text" required id="l-name" />
+          </div>
+
+          <div class="input-box">
+            <label for="email">Email</label>
+            <input type="email" required id="email" />
+          </div>
+
+          <div class="input-box">
+            <label for="office-code">Phone Number</label>
+            <input type="phone" required id="office-code" />
+            <p id="phone-validation"></p>
+          </div>
+
+          <div class="input-box">
+            <label for="job-title">Address</label>
+            <input type="text" required id="job-title" />
+          </div>
+
+          <div class="input-box">
+            <button type="submit" id="register-btn">Register</button>
+            <button id="update-btn" disabled style="background-color: #ee534f">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #contacts {
+        width: 300px;
+        margin: auto;
+      }
+
+      .contact {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      button {
+        cursor: pointer;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        border-radius: 4px;
+      }
+
+      button.edit {
+        background-color: #2196f3;
+      }
+
+      button.delete {
+        background-color: #f44336;
+      }
+
+      button:hover {
+        background-color: white;
+        color: black;
+        border: 1px solid #4caf50;
+      }
+
+      #addContactModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contacts">
+      <!-- Contact List will be displayed here -->
+    </div>
+
+    <!-- Add Contact Button -->
+    <button onclick="openAddContactModal()">Add Contact</button>
+
+    <!-- Add Contact Modal -->
+    <div id="addContactModal">
+      <div class="modal-content">
+        <span class="close" onclick="closeAddContactModal()">&times;</span>
+        <h2>Add Contact</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+        <button onclick="addContact()">Save</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Sample contacts data
+        let contacts = [
+          { id: 1, name: "John Doe", email: "john@example.com" },
+          { id: 2, name: "Jane Smith", email: "jane@example.com" },
+        ];
+
+        // Function to render contacts
+        function renderContacts() {
+          const contactsContainer = document.getElementById("contacts");
+          contactsContainer.innerHTML = "";
+
+          contacts.forEach((contact) => {
+            const contactDiv = document.createElement("div");
+            contactDiv.classList.add("contact");
+            contactDiv.innerHTML = `
+                    <div>
+                        <strong>${contact.name}</strong><br>
+                        ${contact.email}
+                    </div>
+                    <div>
+                        <button class="edit" onclick="editContact(${contact.id})">Edit</button>
+                        <button class="delete" onclick="deleteContact(${contact.id})">Delete</button>
+                    </div>
+                `;
+            contactsContainer.appendChild(contactDiv);
+          });
+        }
+
+        // Function to open Add Contact modal
+        window.openAddContactModal = function () {
+          document.getElementById("addContactModal").style.display = "block";
+        };
+
+        // Function to close Add Contact modal
+        window.closeAddContactModal = function () {
+          document.getElementById("addContactModal").style.display = "none";
+        };
+
+        // Function to add a new contact
+        window.addContact = function () {
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+
+          if (name && email) {
+            const newContact = {
+              id: contacts.length + 1,
+              name: name,
+              email: email,
+            };
+            contacts.push(newContact);
+            renderContacts();
+            closeAddContactModal();
+          }
+        };
+
+        // Function to edit a contact
+        window.editContact = function (id) {
+          const contact = contacts.find((c) => c.id === id);
+
+          if (contact) {
+            const newName = prompt("Enter updated name:", contact.name);
+            const newEmail = prompt("Enter updated email:", contact.email);
+
+            if (newName !== null && newEmail !== null) {
+              contact.name = newName;
+              contact.email = newEmail;
+              renderContacts();
+            }
+          }
+        };
+
+        // Function to delete a contact
+        window.deleteContact = function (id) {
+          const confirmDelete = confirm(
+            "Are you sure you want to delete this contact?"
+          );
+
+          if (confirmDelete) {
+            contacts = contacts.filter((contact) => contact.id !== id);
+            renderContacts();
+          }
+        };
+
+        // Initial rendering
+        renderContacts();
+      });
+    </script>
+  </body>
+</html>
