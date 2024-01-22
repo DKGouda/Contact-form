@@ -17,7 +17,7 @@ var idEl = document.getElementById("id");
 var nameEl = document.getElementById("name");
 var l_NameEl = document.getElementById("l-name");
 var emailEl = document.getElementById("email");
-var officeEl = document.getElementById("office-code"); //officeEl is working as phone number
+var ph_value = document.getElementById("phone-code"); //officeEl is working as phone number
 var invalidPhone = document.getElementById("#phone-validation");
 
 var jobTitleEl = document.getElementById("job-title");
@@ -41,15 +41,15 @@ registerForm.onsubmit = function (e) {
 function phoneValidation() {
   debugger;
   // Phone Number validation
-  if (officeEl.value.length !== 10) {
+  if (ph_value.value.length !== 10) {
     invalidPhone.innerHTML = "** Phone number must be of 10 digits";
     return false;
   }
-  if (isNaN(Number(officeEl.value))) {
+  if (isNaN(Number(ph_value.value))) {
     invalidPhone.innerHTML = "** Phone number must be numeric";
     return false;
   }
-  if (officeEl.value[0] < "6" || officeEl.value[0] > "9") {
+  if (ph_value.value[0] < "6" || ph_value.value[0] > "9") {
     invalidPhone.innerHTML = "** Phone number must start from 6 / 7 / 8 / 9";
     return false;
   }
@@ -68,7 +68,7 @@ function registrationData() {
     name: nameEl.value,
     l_name: l_NameEl.value,
     email: emailEl.value,
-    officeCode: officeEl.value,
+    PhoneCode: ph_value.value,
     jobTitle: jobTitleEl.value,
     profilePic: imgUrl == undefined ? "person.jpg" : imgUrl,
   });
@@ -99,7 +99,7 @@ const getDataFromLocal = () => {
       <td>${data.name}</td>
       <td>${data.l_name}</td>
       <td>${data.email}</td>
-      <td>${data.officeCode}</td>
+      <td>${data.PhoneCode}</td>
       <td>${data.jobTitle}</td>
       <td>
         <button class="edit-btn"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -155,7 +155,7 @@ const getDataFromLocal = () => {
       var name = td[3].innerHTML;
       var l_Name = td[4].innerHTML;
       var email = td[5].innerHTML;
-      var officeCode = td[6].innerHTML;
+      var PhoneCode = td[6].innerHTML;
       var jobTitle = td[7].innerHTML;
       addBtn.click();
       registerBtn.disabled = true;
@@ -164,7 +164,7 @@ const getDataFromLocal = () => {
       nameEl.value = name;
       l_NameEl.value = l_Name;
       emailEl.value = email;
-      officeEl.value = officeCode;
+      ph_value.value = PhoneCode;
       jobTitleEl.value = jobTitle;
     };
   }
